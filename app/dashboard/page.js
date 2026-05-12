@@ -1,6 +1,7 @@
 import { supabase } from '@/lib/supabase';
 import AppointmentCard from '@/components/dashboard/AppointmentCard';
 
+export const dynamic = 'force-dynamic';
 export default async function Dashboard() {
   const { data: appointments } = await supabase
     .from('appointments')
