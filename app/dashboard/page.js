@@ -1,8 +1,18 @@
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-server';
+import { redirect } from 'next/navigation';
 import AppointmentCard from '@/components/dashboard/AppointmentCard';
 
 export const dynamic = 'force-dynamic';
+
 export default async function Dashboard() {
+  const supabase = await createClient();
+
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
   const { data: appointments } = await supabase
     .from('appointments')
     .select('*, services(name)')
