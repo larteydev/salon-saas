@@ -13,6 +13,11 @@ export default async function SalonPage({ params }) {
     return <main className="p-8"><h1>Salon not found</h1></main>;
   }
 
+  const { data: services } = await supabase 
+    .from('services')
+    .select('*')
+    .eq('salon_id', salon.id);
+
   return (
     <main>
       {/* Hero Section */}
@@ -25,6 +30,21 @@ export default async function SalonPage({ params }) {
           className="mt-8 bg-green-500 text-white px-6 py-3 rounded-full font-medium hover:bg-green-600">
           Chat on WhatsApp
         </a>
+      </section>
+
+      {/* Services Section */}
+      <section className="max-w-4xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-center mb-10">Our Services</h2>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {services && services.map((service) => (
+            <div key={service.id} className="border rounded-xl p-6 shadow-sm">
+              <h3 className="text-xl font-semibold">{service.name}</h3>
+              <p className="mt-2 text-gray-500">{service.description}</p>
+              <p className="mt-4 text-pink-600 font-bold">GHS {service.price}</p>
+              <p className="text-gray-400 text-sm">{service.duration} mins</p>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
