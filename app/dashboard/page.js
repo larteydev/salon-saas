@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import AppointmentCard from '@/components/dashboard/AppointmentCard';
+import LogoutButton from '@/components/dashboard/LogoutButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,7 +21,10 @@ export default async function Dashboard() {
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
-      <h1 className="text-3xl font-bold mb-8">Dashboard</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">Dashboard</h1>
+        <LogoutButton />
+      </div>
 
       <section>
         <h2 className="text-xl font-semibold mb-4">Appointments</h2>
