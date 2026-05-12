@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import AppointmentCard from '@/components/dashboard/AppointmentCard';
 import LogoutButton from '@/components/dashboard/LogoutButton';
+import GalleryUpload from '@/components/dashboard/GalleryUpload';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,6 +20,11 @@ export default async function Dashboard() {
     .select('*, services(name)')
     .order('created_at', { ascending: false });
 
+  const { data: salon } = await supabase
+    .from('salons')
+    .select('id')
+    .single();
+
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
       <div className="flex justify-between items-center mb-8">
@@ -34,6 +40,7 @@ export default async function Dashboard() {
           ))}
         </div>
       </section>
+      <GalleryUpload salonId={salon?.id} />
     </main>
   );
 }

@@ -19,6 +19,11 @@ export default async function SalonPage({ params }) {
     .select('*')
     .eq('salon_id', salon.id);
 
+  const { data: gallery } = await supabase
+    .from('gallery_images')
+    .select('*')
+    .eq('salon_id', salon.id);
+
   return (
     <main>
       {/* Hero Section */}
@@ -53,6 +58,21 @@ export default async function SalonPage({ params }) {
         <h2 className="text-3xl font-bold text-center mb-10">Book an Appointment</h2>
         <BookingForm salonId={salon.id} services={services || []} />
       </section>
+
+      {/* Gallery Section */}
+        <section className="max-w-4xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-center mb-10">Our Work</h2>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {gallery && gallery.map((image) => (
+            <img
+                key={image.id}
+                src={image.image_url}
+                alt="Salon work"
+                className="w-full h-48 object-cover rounded-xl"
+            />
+            ))}
+        </div>
+        </section>
     </main>
   );
 }
