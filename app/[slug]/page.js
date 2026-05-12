@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import BookingForm from '@/components/booking/BookingForm';
 
 export default async function SalonPage({ params }) {
   const { slug } = await params;
@@ -45,6 +46,12 @@ export default async function SalonPage({ params }) {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Booking Section */}
+      <section className="max-w-4xl mx-auto px-6 py-16 bg-pink-50">
+        <h2 className="text-3xl font-bold text-center mb-10">Book an Appointment</h2>
+        <BookingForm salonId={salon.id} services={services || []} />
       </section>
     </main>
   );
