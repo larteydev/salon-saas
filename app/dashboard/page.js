@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import AppointmentCard from '@/components/dashboard/AppointmentCard';
 import LogoutButton from '@/components/dashboard/LogoutButton';
 import GalleryUpload from '@/components/dashboard/GalleryUpload';
+import ServicesManager from '@/components/dashboard/ServicesManager';
 
 export const dynamic = 'force-dynamic';
 
@@ -24,6 +25,11 @@ export default async function Dashboard() {
     .from('salons')
     .select('id')
     .single();
+  
+  const { data: services } = await supabase
+    .from('services')
+    .select('*')
+    .eq('salon_id', salon?.id);
 
   return (
     <main className="max-w-5xl mx-auto px-6 py-12">
@@ -41,6 +47,8 @@ export default async function Dashboard() {
         </div>
       </section>
       <GalleryUpload salonId={salon?.id} />
+
+      <ServicesManager initialServices={services || []} salonId={salon?.id} />
     </main>
   );
 }
