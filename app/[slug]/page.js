@@ -25,54 +25,56 @@ export default async function SalonPage({ params }) {
     .eq('salon_id', salon.id);
 
   return (
-    <main>
+    <main className="bg-white">
       {/* Hero Section */}
-      <section className="flex flex-col items-center justify-center min-h-[60vh] bg-pink-50 text-center px-6">
-        <h1 className="text-5xl font-bold text-pink-600">{salon.name}</h1>
-        <p className="mt-4 text-gray-500 text-lg">{salon.location}</p>
-        <p className="mt-1 text-gray-400">{salon.opening_hours}</p>
-        <a
+      <section className="flex flex-col items-center justify-center min-h-[70vh] bg-gradient-to-br from-pink-600 to-rose-500 text-center px-6">
+        <h1 className="text-5xl font-bold text-white">{salon.name}</h1>
+        <p className="mt-4 text-pink-100 text-lg">{salon.location}</p>
+        <p className="mt-1 text-pink-200">{salon.opening_hours}</p>
+        <a    
           href={`https://wa.me/${salon.phone}`}
-          className="mt-8 bg-green-500 text-white px-6 py-3 rounded-full font-medium hover:bg-green-600">
+          className="mt-8 bg-white text-pink-600 px-8 py-3 rounded-full font-semibold hover:bg-pink-50 transition-colors">
           Chat on WhatsApp
         </a>
       </section>
 
       {/* Services Section */}
       <section className="max-w-4xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-center mb-10">Our Services</h2>
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Our Services</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {services && services.map((service) => (
-            <div key={service.id} className="border rounded-xl p-6 shadow-sm">
-              <h3 className="text-xl font-semibold">{service.name}</h3>
-              <p className="mt-2 text-gray-500">{service.description}</p>
-              <p className="mt-4 text-pink-600 font-bold">GHS {service.price}</p>
-              <p className="text-gray-400 text-sm">{service.duration} mins</p>
+            <div key={service.id} className="border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+              <h3 className="text-xl font-semibold text-gray-900">{service.name}</h3>
+              <p className="mt-2 text-gray-600">{service.description}</p>
+              <p className="mt-4 text-pink-600 font-bold text-lg">GHS {service.price}</p>
+              <p className="text-gray-400 text-sm mt-1">{service.duration} mins</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Booking Section */}
-      <section className="max-w-4xl mx-auto px-6 py-16 bg-pink-50">
-        <h2 className="text-3xl font-bold text-center mb-10">Book an Appointment</h2>
-        <BookingForm salonId={salon.id} services={services || []} />
-      </section>
-
       {/* Gallery Section */}
-        <section className="max-w-4xl mx-auto px-6 py-16">
-        <h2 className="text-3xl font-bold text-center mb-10">Our Work</h2>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+      <section className="bg-gray-50 px-6 py-16">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Our Work</h2>
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             {gallery && gallery.map((image) => (
-            <img
+              <img
                 key={image.id}
                 src={image.image_url}
                 alt="Salon work"
-                className="w-full h-48 object-cover rounded-xl"
-            />
+                className="w-full h-48 object-cover rounded-2xl"
+              />
             ))}
+          </div>
         </div>
-        </section>
+      </section>
+
+      {/* Booking Section */}
+      <section className="max-w-4xl mx-auto px-6 py-16">
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-10">Book an Appointment</h2>
+        <BookingForm salonId={salon.id} services={services || []} />
+      </section>
     </main>
   );
 }
