@@ -28,40 +28,47 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-pink-50">
-      <div className="bg-white p-8 rounded-2xl shadow-md w-full max-w-sm">
-        <h1 className="text-2xl font-bold text-center mb-6">Salon Admin</h1>
+  <main className="min-h-[100dvh] bg-stone-900 flex items-center justify-center px-6">
+    <div className="w-full max-w-sm">
+      <p className="text-rose-500 text-sm tracking-widest uppercase mb-3">Admin</p>
+      <h1 className="text-3xl font-bold text-white mb-8">Crane Hair Studio</h1>
 
-        {error && (
-          <p className="text-red-500 text-sm text-center mb-4">{error}</p>
-        )}
+      {error && (
+        <p className="text-red-400 text-sm mb-4">{error}</p>
+      )}
 
-        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+      <form onSubmit={handleLogin} className="flex flex-col gap-4">
+        <div>
+          <label className="block text-sm font-medium text-stone-400 mb-1">Email</label>
           <input
             type="email"
-            placeholder="Email"
+            placeholder="admin@cranehair.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="border rounded-lg p-3"
+            className="w-full bg-stone-800 border border-stone-700 text-white placeholder-stone-500 rounded-xl px-4 py-3 focus:outline-none focus:border-rose-400 transition-colors"
           />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-stone-400 mb-1">Password</label>
           <input
             type="password"
-            placeholder="Password"
+            placeholder="••••••••"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="border rounded-lg p-3"
+            className="w-full bg-stone-800 border border-stone-700 text-white placeholder-stone-500 rounded-xl px-4 py-3 focus:outline-none focus:border-rose-400 transition-colors"
           />
-          <button
-            type="submit"
-            disabled={loading}
-            className="bg-pink-600 text-white py-3 rounded-lg font-medium hover:bg-pink-700 disabled:opacity-50"
-          >
-            {loading ? 'Signing in...' : 'Sign In'}
-          </button>
-        </form>
-      </div>
-    </main>
-  );
+        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="mt-2 bg-rose-500 text-white py-3 rounded-xl font-medium hover:bg-rose-600 active:scale-[0.98] transition-all disabled:opacity-50"
+        >
+          {loading ? 'Signing in...' : 'Sign In'}
+        </button>
+      </form>
+    </div>
+  </main>
+);
 }

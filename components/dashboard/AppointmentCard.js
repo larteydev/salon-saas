@@ -18,40 +18,42 @@ export default function AppointmentCard({ appointment }) {
     setLoading(false);
   }
 
-  const statusColors = {
-    pending: 'bg-yellow-100 text-yellow-700',
-    approved: 'bg-green-100 text-green-700',
-    rejected: 'bg-red-100 text-red-700',
-    completed: 'bg-gray-100 text-gray-700',
+  const statusStyles = {
+    pending: 'bg-amber-50 text-amber-700 border border-amber-200',
+    approved: 'bg-green-50 text-green-700 border border-green-200',
+    rejected: 'bg-red-50 text-red-700 border border-red-200',
+    completed: 'bg-stone-100 text-stone-500 border border-stone-200',
   };
 
   return (
-    <div className="border rounded-xl p-6 shadow-sm">
-      <div className="flex justify-between items-start">
-        <div>
-          <p className="font-semibold text-lg">{appointment.customer_name}</p>
-          <p className="text-gray-500">{appointment.customer_phone}</p>
-          <p className="text-gray-500">{appointment.services?.name}</p>
-          <p className="text-gray-500">{appointment.appointment_date} at {appointment.appointment_time}</p>
+    <div className="bg-white rounded-2xl p-6 shadow-sm border border-stone-100">
+      <div className="flex justify-between items-start gap-4">
+        <div className="flex flex-col gap-1">
+          <p className="font-semibold text-stone-900 text-lg">{appointment.customer_name}</p>
+          <p className="text-stone-500 text-sm">{appointment.customer_phone}</p>
+          <p className="text-stone-600 text-sm mt-1">{appointment.services?.name}</p>
+          <p className="text-stone-400 text-sm">
+            {appointment.appointment_date} · {appointment.appointment_time}
+          </p>
         </div>
-        <span className={`${statusColors[status]} px-3 py-1 rounded-full text-sm font-medium`}>
+        <span className={`text-xs font-medium px-3 py-1 rounded-full whitespace-nowrap ${statusStyles[status]}`}>
           {status}
         </span>
       </div>
 
       {status === 'pending' && (
-        <div className="flex gap-3 mt-4">
+        <div className="flex gap-3 mt-5">
           <button
             onClick={() => updateStatus('approved')}
             disabled={loading}
-            className="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 disabled:opacity-50"
+            className="bg-stone-900 text-white px-5 py-2 rounded-xl text-sm font-medium hover:bg-stone-700 disabled:opacity-50 transition-colors"
           >
             Approve
           </button>
           <button
             onClick={() => updateStatus('rejected')}
             disabled={loading}
-            className="bg-red-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-red-600 disabled:opacity-50"
+            className="border border-red-200 text-red-500 px-5 py-2 rounded-xl text-sm font-medium hover:bg-red-50 disabled:opacity-50 transition-colors"
           >
             Reject
           </button>
@@ -62,7 +64,7 @@ export default function AppointmentCard({ appointment }) {
         <button
           onClick={() => updateStatus('completed')}
           disabled={loading}
-          className="mt-4 bg-gray-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-600 disabled:opacity-50"
+          className="mt-5 border border-stone-200 text-stone-500 px-5 py-2 rounded-xl text-sm font-medium hover:bg-stone-50 disabled:opacity-50 transition-colors"
         >
           Mark Completed
         </button>

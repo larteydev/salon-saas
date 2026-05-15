@@ -32,23 +32,50 @@ export default async function Dashboard() {
     .eq('salon_id', salon?.id);
 
   return (
-    <main className="max-w-5xl mx-auto px-6 py-12">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
-        <LogoutButton />
-      </div>
-
-      <section>
-        <h2 className="text-xl font-semibold mb-4">Appointments</h2>
-        <div className="flex flex-col gap-4">
-          {appointments && appointments.map((apt) => (
-            <AppointmentCard key={apt.id} appointment={apt} />
-          ))}
+    <main className="min-h-[100dvh] bg-stone-50">
+      {/* Header */}
+      <header className="bg-stone-900 px-6 py-5 flex justify-between items-center">
+        <div>
+          <p className="text-rose-500 text-xs tracking-widest uppercase">Admin</p>
+          <h1 className="text-white font-bold text-xl">Crane Hair Studio</h1>
         </div>
-      </section>
-      <GalleryUpload salonId={salon?.id} />
+        <LogoutButton />
+      </header>
 
-      <ServicesManager initialServices={services || []} salonId={salon?.id} />
+      <div className="max-w-5xl mx-auto px-6 py-12">
+
+        {/* Appointments */}
+        <section>
+          <h2 className="text-lg font-semibold text-stone-700 uppercase tracking-widest mb-6">
+            Appointments
+          </h2>
+          {appointments && appointments.length > 0 ? (
+            <div className="flex flex-col gap-4">
+              {appointments.map((apt) => (
+                <AppointmentCard key={apt.id} appointment={apt} />
+              ))}
+            </div>
+          ) : (
+            <p className="text-stone-400">No appointments yet.</p>
+          )}
+        </section>
+
+        <div className="border-t border-stone-200 my-12"/>
+
+        {/* Services */}
+        <ServicesManager initialServices={services || []} salonId={salon?.id} />
+
+        <div className="border-t border-stone-200 my-12"/>
+
+        {/* Gallery */}
+        <section>
+          <h2 className="text-lg font-semibold text-stone-700 uppercase tracking-widest mb-6">
+            Gallery
+          </h2>
+          <GalleryUpload salonId={salon?.id} />
+        </section>
+
+      </div>
     </main>
   );
 }
