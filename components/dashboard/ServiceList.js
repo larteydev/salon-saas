@@ -21,17 +21,22 @@ export default function ServiceList({ initialServices, onDelete }) {
   }
 
   return (
-    <div className="flex flex-col gap-4 max-w-md">
+    <div className="flex flex-col gap-3 max-w-xl">
       {initialServices.map((service) => (
-        <div key={service.id} className="border rounded-xl p-4 flex justify-between items-start">
-          <div>
-            <p className="font-semibold">{service.name}</p>
-            <p className="text-gray-500 text-sm">{service.description}</p>
-            <p className="text-pink-600 font-medium mt-1">GHS {service.price} · {service.duration} mins</p>
+        <div key={service.id} className="bg-white rounded-2xl p-5 border border-stone-100 shadow-sm flex justify-between items-start">
+          <div className="flex flex-col gap-1">
+            <p className="font-semibold text-stone-900">{service.name}</p>
+            {service.description && (
+              <p className="text-stone-400 text-sm">{service.description}</p>
+            )}
+            <p className="text-rose-500 font-medium mt-1">
+              GHS {service.price}
+              {service.duration ? <span className="text-stone-400 font-normal"> · {service.duration} mins</span> : null}
+            </p>
           </div>
           <button
             onClick={() => handleDelete(service.id)}
-            className="text-red-500 text-sm hover:underline ml-4"
+            className="text-stone-300 hover:text-red-400 transition-colors text-sm ml-4 mt-1"
           >
             Delete
           </button>

@@ -18,14 +18,16 @@ export default function ServicesManager({ initialServices, salonId }) {
   }
 
   return (
-    <section className="mt-12">
-      <h2 className="text-xl font-semibold mb-4">Services</h2>
+    <section>
+      <h2 className="text-lg font-semibold text-stone-700 uppercase tracking-widest mb-6">
+        Services
+      </h2>
       <ServiceList
         initialServices={services}
         onDelete={handleDelete}
       />
       <div className="mt-8">
-        <h3 className="text-lg font-medium mb-4">Add New Service</h3>
+        <h3 className="text-base font-medium text-stone-600 mb-4">Add New Service</h3>
         <ServiceForm salonId={salonId} onSuccess={handleUpdate} />
       </div>
     </section>

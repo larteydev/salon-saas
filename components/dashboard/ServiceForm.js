@@ -40,7 +40,7 @@ export default function ServiceForm({ salonId, onSuccess }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-md">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 max-w-xl">
       <input
         type="text"
         name="name"
@@ -48,37 +48,39 @@ export default function ServiceForm({ salonId, onSuccess }) {
         value={formData.name}
         onChange={handleChange}
         required
-        className="border rounded-lg p-3"
+        className="bg-white border border-stone-200 rounded-xl px-4 py-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:border-rose-400 transition-colors"
       />
       <input
         type="text"
         name="description"
-        placeholder="Description"
+        placeholder="Description (optional)"
         value={formData.description}
         onChange={handleChange}
-        className="border rounded-lg p-3"
+        className="bg-white border border-stone-200 rounded-xl px-4 py-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:border-rose-400 transition-colors"
       />
-      <input
-        type="number"
-        name="price"
-        placeholder="Price (GHS)"
-        value={formData.price}
-        onChange={handleChange}
-        required
-        className="border rounded-lg p-3"
-      />
-      <input
-        type="number"
-        name="duration"
-        placeholder="Duration (mins)"
-        value={formData.duration}
-        onChange={handleChange}
-        className="border rounded-lg p-3"
-      />
+      <div className="flex gap-4">
+        <input
+          type="number"
+          name="price"
+          placeholder="Price (GHS)"
+          value={formData.price}
+          onChange={handleChange}
+          required
+          className="bg-white border border-stone-200 rounded-xl px-4 py-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:border-rose-400 transition-colors w-full"
+        />
+        <input
+          type="number"
+          name="duration"
+          placeholder="Duration (mins)"
+          value={formData.duration}
+          onChange={handleChange}
+          className="bg-white border border-stone-200 rounded-xl px-4 py-3 text-stone-900 placeholder-stone-400 focus:outline-none focus:border-rose-400 transition-colors w-full"
+        />
+      </div>
       <button
         type="submit"
         disabled={loading}
-        className="bg-pink-600 text-white py-3 rounded-lg font-medium hover:bg-pink-700 disabled:opacity-50"
+        className="bg-stone-900 text-white py-3 rounded-xl font-medium hover:bg-stone-700 active:scale-[0.98] transition-all disabled:opacity-50"
       >
         {loading ? 'Adding...' : 'Add Service'}
       </button>
