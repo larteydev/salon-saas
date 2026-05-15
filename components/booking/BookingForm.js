@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-browser';
 
 export default function BookingForm({ salonId, services }) {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ export default function BookingForm({ salonId, services }) {
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const supabase = createClient();
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });

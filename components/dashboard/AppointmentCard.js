@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase-browser';
 
 export default function AppointmentCard({ appointment }) {
   const [status, setStatus] = useState(appointment.status);
   const [loading, setLoading] = useState(false);
+  const supabase = createClient();
 
   async function updateStatus(newStatus) {
     setLoading(true);
