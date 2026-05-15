@@ -46,22 +46,32 @@ export default function GalleryUpload({ salonId }) {
   }
 
   return (
-    <div className="mt-8">
-      <h2 className="text-xl font-semibold mb-4">Upload Gallery Images</h2>
+    <div>
+      <label className="block text-sm font-medium text-stone-600 mb-3">
+        Select images to upload (multiple allowed)
+      </label>
       <input
         type="file"
         accept="image/*"
         multiple
         onChange={handleUpload}
         disabled={uploading}
-        className="border rounded-lg p-3 w-full max-w-md"
+        className="block w-full max-w-xl text-sm text-stone-500
+          file:mr-4 file:py-2 file:px-5
+          file:rounded-xl file:border-0
+          file:text-sm file:font-medium
+          file:bg-stone-900 file:text-white
+          hover:file:bg-stone-700
+          disabled:opacity-50 cursor-pointer"
       />
       {uploading && (
-        <p className="mt-2 text-stone-500">
+        <p className="mt-3 text-stone-400 text-sm">
           Uploading {progress.done} of {progress.total}...
         </p>
       )}
-      {message && <p className="mt-2 text-green-600">{message}</p>}
+      {message && (
+        <p className="mt-3 text-green-600 text-sm">{message}</p>
+      )}
     </div>
   );
 }
